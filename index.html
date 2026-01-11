@@ -102,7 +102,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
         }
 
         /* Ad Container Styles - 320x50 */
@@ -166,6 +166,92 @@
 
         .spin-trigger:hover { transform: translate(-50%, -50%) scale(1.1); }
         .spin-trigger.disabled { filter: grayscale(1); cursor: not-allowed; pointer-events: none; }
+
+        /* CHECK REWARDS BUTTON STYLE */
+        .btn-check-rewards {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+        
+        .btn-check-rewards:hover {
+            background: var(--primary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- SHARE SECTION STYLES --- */
+        .share-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 20px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, #10b981, #3b82f6);
+        }
+
+        .share-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
+        }
+
+        .share-icon-box {
+            width: 40px; height: 40px; background: rgba(16, 185, 129, 0.15);
+            color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .share-text h3 { font-size: 1.1rem; color: white; margin-bottom: 2px; }
+        .share-text span { font-size: 0.8rem; color: #10b981; font-weight: 600; text-transform: uppercase; }
+
+        .btn-share-main {
+            width: 100%;
+            background: #25D366; /* WhatsApp Green */
+            color: white; border: none; padding: 12px; border-radius: 8px;
+            font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.3s; margin-bottom: 15px;
+        }
+        .btn-share-main:hover { background: #1ebd5b; transform: translateY(-2px); }
+
+        .copy-wrapper {
+            display: flex; gap: 10px; background: rgba(0,0,0,0.3);
+            padding: 5px; border-radius: 8px; border: 1px solid var(--border);
+        }
+
+        .copy-wrapper input {
+            background: transparent; border: none; color: var(--text-mute);
+            font-size: 0.8rem; flex: 1; padding-left: 10px; outline: none;
+        }
+
+        .btn-copy {
+            background: #334155; color: white; border: none; padding: 5px 15px;
+            border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
+        }
+        .btn-copy:hover { background: #475569; }
+
+        .share-instructions {
+            font-size: 0.7rem; color: var(--text-mute); margin-top: 10px; line-height: 1.4;
+        }
 
         /* --- 6. PARTNERS / NATIVE AD SECTION --- */
         .partners-section {
@@ -234,7 +320,7 @@
         .footer-links a { color: var(--text-mute); text-decoration: none; transition: 0.3s; }
         .footer-links a:hover { color: white; }
 
-        /* --- 9. MODAL --- */
+        /* --- 9. MODAL & CLOSE BUTTON --- */
         .modal-backdrop {
             position: fixed; inset: 0; background: rgba(0,0,0,0.85);
             backdrop-filter: blur(15px); z-index: 100;
@@ -249,8 +335,19 @@
             max-width: 450px; width: 90%; transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative; 
         }
         .modal-backdrop.active .modal-content { transform: scale(1); }
+        
+        .modal-close-btn {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(255, 255, 255, 0.1); border: none;
+            color: #94a3b8; width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; font-size: 1rem; display: flex; align-items: center;
+            justify-content: center; transition: all 0.2s; z-index: 10;
+        }
+        .modal-close-btn:hover { background: rgba(255, 255, 255, 0.2); color: white; transform: rotate(90deg); }
+
         .prize-icon {
             font-size: 4rem; margin-bottom: 20px;
             background: linear-gradient(135deg, var(--accent), var(--primary));
@@ -313,13 +410,12 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: AD & WHEEL -->
+        <!-- RIGHT COLUMN: AD, WHEEL, SHARE, CHECK REWARD -->
         <div class="right-column gsap-wheel">
             
             <!-- 320x50 BANNER AD -->
             <div class="ad-container">
                 <span class="ad-label-xs">Advertisement</span>
-                
                 <!-- 320x50 AD CODE -->
                 <script type="text/javascript">
                     atOptions = {
@@ -331,8 +427,6 @@
                     };
                 </script>
                 <script type="text/javascript" src="https://www.highperformanceformat.com/d8b479737b1ccc3fc18b75dd5a379c1f/invoke.js"></script>
-                <!-- END 320x50 AD CODE -->
-
             </div>
 
             <!-- THE WHEEL -->
@@ -345,6 +439,41 @@
                 </div>
                 <button class="spin-trigger" id="spinBtn">SPIN</button>
             </div>
+
+            <!-- CHECK REWARDS BUTTON -->
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="btn-check-rewards" onclick="checkRewards()">
+                    <i class="fa-solid fa-wallet"></i> Check Your Rewards
+                </button>
+                <p style="font-size: 0.75rem; color: #9ca3af; margin-top: 5px;">
+                    All rewards you won are saved in the reward page.
+                </p>
+            </div>
+
+            <!-- SHARE & WIN CARD -->
+            <div class="share-card">
+                <div class="share-header">
+                    <div class="share-icon-box"><i class="fa-solid fa-share-nodes"></i></div>
+                    <div class="share-text">
+                        <h3>Share & Earn Bonus</h3>
+                        <span>10 USD + 1 Mystery Box</span>
+                    </div>
+                </div>
+                
+                <button class="btn-share-main" onclick="shareNative()">
+                    <i class="fa-brands fa-whatsapp"></i> Share with Friends
+                </button>
+                
+                <div class="copy-wrapper">
+                    <input type="text" id="shareInput" value="🎉 I just got a FREE Spin on TechDrop! 🎁 Win iPhone 16 Pro, Samsung S25 Ultra, or $100 Cash! 👇 Play here: https://free-giveaway-2026.github.io/Giveaway-/" readonly>
+                    <button class="btn-copy" onclick="copyShareText()">Copy</button>
+                </div>
+                
+                <p class="share-instructions">
+                    <i class="fa-solid fa-circle-info"></i> If direct messaging fails, please click "Copy" and share the message manually with your friends.
+                </p>
+            </div>
+
         </div>
     </main>
 
@@ -410,6 +539,11 @@
     <!-- Modal -->
     <div class="modal-backdrop" id="modal">
         <div class="modal-content">
+            <!-- Close Button -->
+            <button class="modal-close-btn" onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
             <div class="modal-inner">
                 <i class="fa-solid fa-gift prize-icon" id="modalIcon"></i>
                 <h2 id="modalTitle" style="font-family: var(--font-head); font-size: 2rem; margin-bottom: 10px;">Congratulations!</h2>
@@ -432,7 +566,9 @@
 
     <!-- NEW SOCIAL BAR AD CODE -->
     <script src="https://pl26276285.effectivegatecpm.com/7f/ff/a5/7fffa579dd0f6151212e65636cbce2c4.js"></script>
-    <!-- END NEW SOCIAL BAR AD CODE -->
+    
+    <!-- POPUNDER AD CODE -->
+    <script src="https://pl28443325.effectivegatecpm.com/4f/6c/f0/4f6cf068cdb97c018c0a26d2d2a6bab4.js"></script>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -449,17 +585,78 @@
         let linkIndex = 0;
 
         function openAdLink() {
-            // Get current link based on index
             const link = claimLinks[linkIndex];
-            
-            // Open in new tab
             window.open(link, '_blank');
-            
-            // Increment for next click (Loop 0->1->2->0)
             linkIndex = (linkIndex + 1) % claimLinks.length;
         }
 
-        // --- 2. CONFIGURATION ---
+        // --- 2. CHECK REWARDS LOGIC ---
+        function checkRewards() {
+            if (spinsRemaining > 0) {
+                alert("You still have " + spinsRemaining + " free spins! Please finish them to claim all your rewards.");
+            } else {
+                // REDIRECT TO SECOND PAGE (claim.html)
+                window.location.href = "claim.html"; 
+            }
+        }
+
+        // --- 3. SHARE & COPY LOGIC (FIXED) ---
+        const shareMsg = "🎉 I just got a FREE Spin on TechDrop! 🎁 Win iPhone 16 Pro, Samsung S25 Ultra, or $100 Cash! 👇 Play here: https://free-giveaway-2026.github.io/Giveaway-/";
+        
+        function shareNative() {
+            // Priority: WhatsApp Web/App
+            const waUrl = `https://wa.me/?text=${encodeURIComponent(shareMsg)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        function copyShareText() {
+            var copyText = document.getElementById("shareInput");
+            
+            // 1. Select the text
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // Mobile
+
+            // 2. Try Fallback Method (Best for HTTP/Localhost)
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showCopySuccess();
+                } else {
+                    // Try Modern API if fallback failed
+                    navigator.clipboard.writeText(copyText.value).then(showCopySuccess);
+                }
+            } catch (err) {
+                // Last Resort: Prompt
+                alert("Press CTRL+C to copy");
+            }
+        }
+
+        function showCopySuccess() {
+            const btn = document.querySelector(".btn-copy");
+            const originalText = btn.innerText;
+            btn.innerText = "Copied!";
+            btn.style.background = "#10b981";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "#334155";
+            }, 2000);
+        }
+
+        // --- 4. CLOSE MODAL LOGIC ---
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            
+            // If spins left, re-enable spin button
+            if (spinsRemaining > 0) {
+                isSpinning = false;
+                spinBtn.classList.remove('disabled');
+            } else {
+                spinBtn.innerText = "DONE";
+            }
+        }
+
+        // --- 5. WHEEL CONFIGURATION ---
         const segments = [
             { label: "S25 Ultra", color: "#4c1d95", type: "grand" }, 
             { label: "Try Again", color: "#18181b", type: "bad" },    
